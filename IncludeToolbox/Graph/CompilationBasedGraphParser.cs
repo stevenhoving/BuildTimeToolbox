@@ -133,6 +133,37 @@ namespace IncludeToolbox.Graph
             VSUtils.GetDTE().Events.BuildEvents.OnBuildDone -= OnBuildConfigFinished;
         }
 
+        private static int ParseInt(string text, string token)
+        {
+            var parts = text.Split(new string[] { token }, StringSplitOptions.None);
+            return Convert.ToInt32(parts[1]);
+        }
+
+        private static string CleanString(string text)
+        {
+            return text.Split(new string[] { ">\t" }, StringSplitOptions.None)[1];
+        }
+
+        struct FilenameAndTime
+        {
+            public string filename;
+            public double time; // time in seconds
+            public int count; // header count
+        };
+
+        private static FilenameAndTime GetFilenameAndTime(string text)
+        {
+            var parts = text.Split(new string[] { ":" }, StringSplitOptions.None);
+            var result = new FilenameAndTime();
+            var time_string = parts.Last();
+
+            time_string = time_string.Substring(0, time_string.Count() - 1); // remove the last letter
+            result.time = Convert.ToDouble(time_string);
+            result.filename = parts[0].Split('\t').Last() + ':' + parts[1];
+
+            return result;
+        }
+
         private static void OnBuildConfigFinished(vsBuildScope Scope, vsBuildAction Action)
         {
             // Sometimes we get this message several times.
@@ -153,19 +184,62 @@ namespace IncludeToolbox.Graph
                 // What we're building right now is a tree.
                 // However, combined with the existing data it might be a wide graph.
                 var includeTreeItemStack = new Stack<IncludeGraph.GraphItem>();
-                includeTreeItemStack.Push(graphBeingExtended.CreateOrGetItem(documentBeingCompiled.FullName, out _));
+                includeTreeItemStack.Push(graphBeingExtended.CreateOrGetItem(documentBeingCompiled.FullName, 0.0, out _));
 
                 var includeDirectories = VSUtils.GetProjectIncludeDirectories(documentBeingCompiled.ProjectItem.ContainingProject);
                 includeDirectories.Insert(0, PathUtil.Normalize(documentBeingCompiled.Path) + Path.DirectorySeparatorChar);
 
-                const string includeNoteString = "Note: including file: ";
+                //const string includeNoteString = "Note: including file: ";
+                const string includeHeadersString = "Include Headers:";
                 string[] outputLines = System.Text.RegularExpressions.Regex.Split(outputText, "\r\n|\r|\n"); // yes there are actually \r\n in there in some VS versions.
-                foreach (string line in outputLines)
+
+                /*
+                 mode:
+                 - 0 means not in a parsing mode
+                 - 1 means parsing 'Include Headers:' section
+                 */
+                int mode = 0;
+
+                for (int line_index = 0; line_index < outputLines.Count(); line_index++)
                 {
-                    int startIndex = line.IndexOf(includeNoteString);
-                    if (startIndex < 0)
+                    string line = outputLines[line_index];
+                    // keeping track parsing state
+                    if (mode == 0)
+                    {
+                        if (line.IndexOf(includeHeadersString) >= 0)
+                        {
+                            mode = 1;
+                            continue;
+                        }
+                        // hack we do not support other states yet
                         continue;
-                    startIndex += includeNoteString.Length;
+                    }
+
+                    line = CleanString(line);
+                    int count = ParseInt(line, "Count:");
+                    for (int include_line_index = 0; include_line_index < count; include_line_index++)
+                    {
+                        line_index++;
+                        string include_line = outputLines[line_index];
+                        include_line = CleanString(include_line);
+                        int depth = include_line.Count(f => f == '\t') - 1;
+
+                        if (depth >= includeTreeItemStack.Count)
+                        {
+                            includeTreeItemStack.Push(includeTreeItemStack.Peek().Includes.Last().IncludedFile);
+                        }
+                        while (depth < includeTreeItemStack.Count - 1)
+                            includeTreeItemStack.Pop();
+
+                        var filename_and_time = GetFilenameAndTime(include_line);
+                        IncludeGraph.GraphItem includedItem = graphBeingExtended.CreateOrGetItem(filename_and_time.filename, filename_and_time.time, out _);
+                        includeTreeItemStack.Peek().Includes.Add(new IncludeGraph.Include() { IncludedFile = includedItem });
+                    }
+                    mode = 0;
+
+/*
+                    int startIndex = 0;
+                    startIndex += includeHeadersString.Length;
 
                     int includeStartIndex = startIndex;
                     while (includeStartIndex < line.Length && line[includeStartIndex] == ' ')
@@ -182,6 +256,7 @@ namespace IncludeToolbox.Graph
                     string fullIncludePath = line.Substring(includeStartIndex);
                     IncludeGraph.GraphItem includedItem = graphBeingExtended.CreateOrGetItem(fullIncludePath, out _);
                     includeTreeItemStack.Peek().Includes.Add(new IncludeGraph.Include() { IncludedFile = includedItem });
+*/
                 }
             }
 

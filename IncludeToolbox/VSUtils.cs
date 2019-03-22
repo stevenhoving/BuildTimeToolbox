@@ -40,9 +40,9 @@ namespace IncludeToolbox
         private static IVCHelper InitVCHelper()
         {
             var dte = GetDTE();
-            if (dte.Version.StartsWith("14."))
-                vcUtils = new VCProjectUtils.VS14.VCHelper();
-            else if (dte.Version.StartsWith("15."))
+            //if (dte.Version.StartsWith("14."))
+                //vcUtils = new VCProjectUtils.VS14.VCHelper();
+            if (dte.Version.StartsWith("15."))
                 vcUtils = new VCProjectUtils.VS15.VCHelper();
 
             return vcUtils;

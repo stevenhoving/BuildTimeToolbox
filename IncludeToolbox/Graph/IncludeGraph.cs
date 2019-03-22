@@ -25,10 +25,11 @@ namespace IncludeToolbox.Graph
 
         public class GraphItem
         {
-            public GraphItem(string absoluteFilename)
+            public GraphItem(string absoluteFilename, double time)
             {
                 AbsoluteFilename = absoluteFilename;
                 FormattedName = absoluteFilename;
+                Time = time;
                 Includes = new List<Include>();
             }
 
@@ -45,6 +46,8 @@ namespace IncludeToolbox.Graph
             /// A formatted name that can be set from the outside. Is by default the same as AbsoluteFilename.
             /// </summary>
             public string FormattedName { get; set; }
+
+            public double Time { get; set; }
 
             /// <summary>
             /// List of all includes of this file.
@@ -68,19 +71,19 @@ namespace IncludeToolbox.Graph
         /// Filename of an include, may be relative. Will be normalized internally.
         /// If an absolute filename can't be provided (e.g. due to resolve failure), this can be any kind of unique file identifier.
         /// </param>
-        public GraphItem CreateOrGetItem(string filename, out bool isNew)
+        public GraphItem CreateOrGetItem(string filename, double time, out bool isNew)
         {
             filename = Utils.GetExactPathName(filename);
-            return CreateOrGetItem_AbsoluteNormalizedPath(filename, out isNew);
+            return CreateOrGetItem_AbsoluteNormalizedPath(filename, time, out isNew);
         }
 
-        public GraphItem CreateOrGetItem_AbsoluteNormalizedPath(string normalizedAbsoluteFilename, out bool isNew)
+        public GraphItem CreateOrGetItem_AbsoluteNormalizedPath(string normalizedAbsoluteFilename, double time, out bool isNew)
         {
             GraphItem outItem;
             isNew = !graphItems.TryGetValue(normalizedAbsoluteFilename, out outItem);
             if (isNew)
             {
-                outItem = new GraphItem(normalizedAbsoluteFilename);
+                outItem = new GraphItem(normalizedAbsoluteFilename, time);
                 graphItems.Add(normalizedAbsoluteFilename, outItem);
             }
             return outItem;

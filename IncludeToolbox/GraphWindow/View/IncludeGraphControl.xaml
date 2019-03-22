@@ -41,7 +41,15 @@
                 <TreeView Grid.Row="1" ItemsSource="{Binding HierarchyIncludeTreeModel.Children}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type local:IncludeTreeViewItem}">
-                            <TextBlock Text="{Binding Name}" ToolTip="{Binding AbsoluteFilename}" MouseDown="OnIncludeTreeItemMouseDown"/>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}| {1} : {2:G}">
+                                        <Binding Path="Children.Count"/>
+                                        <Binding Path="Name" />
+                                        <Binding Path="Time" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>

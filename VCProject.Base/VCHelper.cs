@@ -106,14 +106,16 @@ namespace VCProjectUtils.VS15
         public void SetCompilerSetting_ShowIncludes(Project project, bool show, out string reasonForFailure)
         {
             VCCLCompilerTool compilerTool = GetCompilerTool(project, out reasonForFailure);
-            if(compilerTool != null)
-                compilerTool.ShowIncludes = show;
+            if (compilerTool != null)
+                //compilerTool.ShowIncludes = show;
+                compilerTool.AdditionalOptions = "-d1reportTime";
         }
 
         public bool? GetCompilerSetting_ShowIncludes(Project project, out string reasonForFailure)
         {
             VCCLCompilerTool compilerTool = GetCompilerTool(project, out reasonForFailure);
-            return compilerTool?.ShowIncludes;
+            return compilerTool.AdditionalOptions.Contains("-d1reportTime");
+            //return compilerTool?.ShowIncludes;
         }
 
         public string GetCompilerSetting_PreprocessorDefinitions(Project project, out string reasonForFailure)

@@ -52,6 +52,7 @@ namespace IncludeToolbox.GraphWindow
             this.include = include;
             cachedItems = null;
             Name = include.IncludedFile?.FormattedName ?? "";
+            Time = include.IncludedFile?.Time ?? 0.0;
             AbsoluteFilename = include.IncludedFile?.AbsoluteFilename;
             this.includingFileAbsoluteFilename = includingFileAbsoluteFilename;
 

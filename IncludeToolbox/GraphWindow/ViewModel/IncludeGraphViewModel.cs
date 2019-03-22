@@ -218,7 +218,7 @@ namespace IncludeToolbox.GraphWindow
                 foreach (var item in graph.GraphItems)
                     item.FormattedName = IncludeFormatter.FormatPath(item.AbsoluteFilename, FormatterOptionsPage.PathMode.Shortest_AvoidUpSteps, includeDirectories);
 
-                ResetIncludeTreeModel(graph.CreateOrGetItem(currentDocument.FullName, out _));
+                ResetIncludeTreeModel(graph.CreateOrGetItem(currentDocument.FullName, 0.0, out _));
             }
 
             OnNotifyPropertyChanged(nameof(NumIncludes));

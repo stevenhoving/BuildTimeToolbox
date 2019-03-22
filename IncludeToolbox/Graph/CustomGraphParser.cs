@@ -27,7 +27,7 @@ namespace IncludeToolbox.Graph
         /// </param>
         public static void AddIncludesRecursively_ManualParsing(this IncludeGraph graph, string filename, string fileContent, IEnumerable<string> includeDirectories, IEnumerable<string> nonParseDirectories)
         {
-            var graphItem = graph.CreateOrGetItem(filename, out bool isNewGraphItem);
+            var graphItem = graph.CreateOrGetItem(filename, 0.0, out bool isNewGraphItem);
             if (!isNewGraphItem)
                 return;
 
@@ -37,7 +37,7 @@ namespace IncludeToolbox.Graph
         /// <see cref="AddIncludesRecursively_ManualParsing(IncludeGraph, string, string, IEnumerable{string})"/>
         public static void AddIncludesRecursively_ManualParsing(this IncludeGraph graph, string filename, IEnumerable<string> includeDirectories, IEnumerable<string> nonParseDirectories)
         {
-            var graphItem = graph.CreateOrGetItem(filename, out bool isNewGraphItem);
+            var graphItem = graph.CreateOrGetItem(filename, 0.0, out bool isNewGraphItem);
             if (!isNewGraphItem)
                 return;
 
@@ -55,7 +55,7 @@ namespace IncludeToolbox.Graph
                 // Try to resolve the include (may fail)
                 string resolvedInclude = includeLine.TryResolveInclude(includeDirectoriesPlusLocal, out bool successfullyResolved);
                 // Create a link to the file in any case now even if resolving was unsuccessful.
-                var includedFile = graph.CreateOrGetItem_AbsoluteNormalizedPath(resolvedInclude, out bool isNewGraphItem);
+                var includedFile = graph.CreateOrGetItem_AbsoluteNormalizedPath(resolvedInclude, 0.0, out bool isNewGraphItem);
 
                 if (successfullyResolved && isNewGraphItem && !nonParseDirectories.Any(x => resolvedInclude.StartsWith(x)))
                 {
