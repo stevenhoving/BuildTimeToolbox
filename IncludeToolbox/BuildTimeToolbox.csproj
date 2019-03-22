@@ -81,17 +81,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GraphWindow\ViewModel\IncludeTreeViewItem.cs" />
-    <Compile Include="TryAndErrorRemoval.cs" />
-    <Compile Include="Commands\TryAndErrorRemoval_CodeWindow.cs" />
-    <Compile Include="Commands\TryAndErrorRemoval_Project.cs" />
     <Compile Include="Commands\FormatIncludes.cs" />
     <Compile Include="Formatter\IncludeFormatter.cs" />
     <Compile Include="Package\IncludeToolboxPackage.cs" />
     <Compile Include="Formatter\IncludeLineInfo.cs" />
     <Compile Include="Options\Constants.cs" />
-    <Compile Include="Options\TryAndErrorRemovalOptionsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="GraphWindow\View\IncludeGraphToolWindow.cs" />
     <Compile Include="GraphWindow\View\IncludeGraphControl.xaml.cs">
       <DependentUpon>IncludeGraphControl.xaml</DependentUpon>
