@@ -12,7 +12,6 @@ namespace IncludeToolbox
     [ProvideMenuResource("Menus.ctmenu", 1)]
 
     [ProvideOptionPage(typeof(FormatterOptionsPage), Options.Constants.Category, FormatterOptionsPage.SubCategory, 1000, 1001, true)]
-    [ProvideOptionPage(typeof(IncludeWhatYouUseOptionsPage), Options.Constants.Category, IncludeWhatYouUseOptionsPage.SubCategory, 1000, 1002, true)]
     [ProvideOptionPage(typeof(TryAndErrorRemovalOptionsPage), Options.Constants.Category, TryAndErrorRemovalOptionsPage.SubCategory, 1000, 1003, true)]
     [ProvideOptionPage(typeof(ViewerOptionsPage), Options.Constants.Category, ViewerOptionsPage.SubCategory, 1000, 1004, true)]
 
@@ -48,11 +47,10 @@ namespace IncludeToolbox
         {
             Commands.IncludeGraphToolWindow.Initialize(this);
             Commands.FormatIncludes.Initialize(this);
-            Commands.IncludeWhatYouUse.Initialize(this);
             Commands.TryAndErrorRemoval_CodeWindow.Initialize(this);
             Commands.TryAndErrorRemoval_Project.Initialize(this);
 
-            base.Initialize();            
+            base.Initialize();
         }
 
         protected override void Dispose(bool disposing)

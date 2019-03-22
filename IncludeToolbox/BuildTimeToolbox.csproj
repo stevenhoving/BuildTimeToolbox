@@ -65,7 +65,6 @@
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandSetGuids.cs" />
     <Compile Include="Commands\IncludeGraphToolWindow.cs" />
-    <Compile Include="Commands\IncludeWhatYouUse.cs" />
     <Compile Include="GraphWindow\Commands\SaveDGML.cs" />
     <Compile Include="GraphWindow\Commands\RefreshModeComboBoxOptions.cs" />
     <Compile Include="GraphWindow\Commands\RefreshModeComboBox.cs" />
@@ -78,11 +77,6 @@
     <Compile Include="Graph\DGMLGraph.cs" />
     <Compile Include="Graph\CompilationBasedGraphParser.cs" />
     <Compile Include="Graph\IncludeGraph.cs" />
-    <Compile Include="IncludeWhatYouUse\IWYU.cs" />
-    <Compile Include="IncludeWhatYouUse\IWYUDownload.cs" />
-    <Compile Include="Options\IncludeWhatYouUseOptionsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Options\ViewerOptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>

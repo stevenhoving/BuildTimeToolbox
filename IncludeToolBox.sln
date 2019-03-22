@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncludeToolbox", "IncludeToolBox\IncludeToolbox.csproj", "{BB4BFB45-287B-4A10-ACC5-3956F3738597}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTimeToolbox", "IncludeToolBox\BuildTimeToolbox.csproj", "{BB4BFB45-287B-4A10-ACC5-3956F3738597}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCProjectUtils.Base", "VCProject.Base\VCProjectUtils.Base.csproj", "{17FD3B24-A713-440F-BCA5-AC3C0E441CE5}"
 EndProject
