@@ -1,9 +1,7 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.VCProjectEngine;
 
-#if VC14
-namespace VCProjectUtils.VS14
-#elif VC15
+#if VC15
 namespace VCProjectUtils.VS15
 #endif
 {

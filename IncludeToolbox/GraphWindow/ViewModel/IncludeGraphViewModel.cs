@@ -20,11 +20,11 @@ namespace IncludeToolbox.GraphWindow
 
         public enum RefreshMode
         {
-            DirectParsing,
-            ShowIncludes,
+            ReportTime,
         }
 
-        public static readonly string[] RefreshModeNames = new string[] { "Direct Parsing", "Compile /showIncludes" };
+        //public static readonly string[] RefreshModeNames = new string[] { "Direct Parsing", "Compile -d1reportTime" };
+        public static readonly string[] RefreshModeNames = new string[] { "Compile -d1reportTime" };
 
         public RefreshMode ActiveRefreshMode
         {
@@ -39,7 +39,7 @@ namespace IncludeToolbox.GraphWindow
                 }
             }
         }
-        RefreshMode activeRefreshMode = RefreshMode.DirectParsing;
+        RefreshMode activeRefreshMode = RefreshMode.ReportTime;
 
         public IEnumerable<RefreshMode> PossibleRefreshModes => Enum.GetValues(typeof(RefreshMode)).Cast<RefreshMode>();
 
@@ -126,7 +126,7 @@ namespace IncludeToolbox.GraphWindow
             }
             else
             {
-                if (activeRefreshMode == RefreshMode.ShowIncludes)
+                if (activeRefreshMode == RefreshMode.ReportTime)
                 {
                     CanRefresh = CompilationBasedGraphParser.CanPerformShowIncludeCompilation(currentDocument, out string reasonForFailure);
                     RefreshTooltip = reasonForFailure;
@@ -153,27 +153,11 @@ namespace IncludeToolbox.GraphWindow
             {
                 switch (activeRefreshMode)
                 {
-                    case RefreshMode.ShowIncludes:
+                    case RefreshMode.ReportTime:
                         if (newGraph.AddIncludesRecursively_ShowIncludesCompilation(currentDocument, OnNewTreeComputed))
                         {
                             ResetIncludeTreeModel(null);
                         }
-                        break;
-
-                    case RefreshMode.DirectParsing:
-                        ResetIncludeTreeModel(null);
-                        var settings = (ViewerOptionsPage)IncludeToolboxPackage.Instance.GetDialogPage(typeof(ViewerOptionsPage));
-                        var includeDirectories = VSUtils.GetProjectIncludeDirectories(currentDocument.ProjectItem.ContainingProject);
-                        var uiThreadDispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
-                        System.Threading.Tasks.Task.Run(
-                            () =>
-                            {
-                                newGraph.AddIncludesRecursively_ManualParsing(currentDocument.FullName, includeDirectories, settings.NoParsePaths);
-                            }).ContinueWith(
-                            (x) =>
-                            {
-                                uiThreadDispatcher.BeginInvoke((Action)(() => OnNewTreeComputed(newGraph, true)));
-                            });
                         break;
 
                     default:
