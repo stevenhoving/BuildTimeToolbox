@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="ToolWindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <local:CollectionViewFactoryConverter x:Key="converter" />
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -38,13 +39,13 @@
 
         <TabControl Grid.Row="1">
             <TabItem Header="Include Hierarchy">
-                <TreeView Grid.Row="1" ItemsSource="{Binding HierarchyIncludeTreeModel.Children}">
+                <TreeView Grid.Row="1" ItemsSource="{Binding HierarchyIncludeTreeModel.Children, Converter={StaticResource converter}, ConverterParameter=Time}">
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type local:IncludeTreeViewItem}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children, Converter={StaticResource converter}, ConverterParameter=Time}" DataType="{x:Type local:IncludeTreeViewItem}" >
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0}| {1} : {2:G}">
-                                        <Binding Path="Children.Count"/>
+                                        <Binding Path="Children.Count" />
                                         <Binding Path="Name" />
                                         <Binding Path="Time" />
                                     </MultiBinding>

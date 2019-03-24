@@ -4,11 +4,32 @@ using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows.Data;
 
 namespace IncludeToolbox.GraphWindow
 {
+    // Creates a CollectionView for databinding to a HierarchicalTemplate ItemSource
+    // \see https://social.msdn.microsoft.com/Forums/vstudio/en-US/0fe5045e-9753-4d7f-ba28-7c23ed213dd6/treeview-sort?forum=wpf
+    public class CollectionViewFactoryConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            System.Collections.IList collection = value as System.Collections.IList;
+            ListCollectionView view = new ListCollectionView(collection);
+            SortDescription sort = new SortDescription(parameter.ToString(), ListSortDirection.Descending);
+            view.SortDescriptions.Add(sort);
+            return view;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    };
+
     public class IncludeGraphViewModel : PropertyChangedBase
     {
         public HierarchyIncludeTreeViewItem HierarchyIncludeTreeModel { get; set; } = new HierarchyIncludeTreeViewItem(new IncludeGraph.Include(), "");
@@ -16,7 +37,6 @@ namespace IncludeToolbox.GraphWindow
 
         private IncludeGraph graph = null;
         private EnvDTE.Document currentDocument = null;
-
 
         public enum RefreshMode
         {
