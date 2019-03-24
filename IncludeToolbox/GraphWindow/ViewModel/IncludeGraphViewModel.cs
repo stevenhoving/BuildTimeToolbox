@@ -23,7 +23,6 @@ namespace IncludeToolbox.GraphWindow
             ReportTime,
         }
 
-        //public static readonly string[] RefreshModeNames = new string[] { "Direct Parsing", "Compile -d1reportTime" };
         public static readonly string[] RefreshModeNames = new string[] { "Compile -d1reportTime" };
 
         public RefreshMode ActiveRefreshMode
@@ -166,7 +165,7 @@ namespace IncludeToolbox.GraphWindow
             }
             catch(Exception e)
             {
-                Output.Instance.WriteLine("Unexpected error when refreshing Include Graph: {0}", e);
+                Output.Instance.WriteLine("Unexpected error when refreshing BuildTime Graph: {0}", e);
                 OnNewTreeComputed(newGraph, false);
             }
         }

@@ -15,7 +15,7 @@ namespace IncludeToolbox
         public const string SubCategory = "Include Viewer & Graph";
         private const string collectionName = "IncludeViewer";
 
-        [Category("Include Graph Parsing")]
+        [Category("BuildTime Graph Parsing")]
         [DisplayName("Graph Endpoint Directories")]
         [Description("List of absolute directory paths. For any include below these paths, the graph parsing will stop.")]
         public string[] NoParsePaths

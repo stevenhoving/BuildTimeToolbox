@@ -10,8 +10,6 @@ namespace IncludeToolbox.GraphWindow
 
         public double Time { get; protected set; }
 
-        public int Count { get; protected set; }
-
         /// <summary>
         /// List of children, builds tree lazily.
         /// </summary>
@@ -29,9 +27,6 @@ namespace IncludeToolbox.GraphWindow
             OnNotifyPropertyChanged(nameof(Time));
             OnNotifyPropertyChanged(nameof(Children));
             OnNotifyPropertyChanged(nameof(AbsoluteFilename));
-
-            //var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, element, index);
-            //OnCollectionChanged(nameof(Children));
         }
 
         /// <summary>

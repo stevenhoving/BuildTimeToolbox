@@ -70,14 +70,14 @@ namespace IncludeToolbox
         {
             string output = string.Format(message, stringParams);
             WriteLine(output);
-            VsShellUtilities.ShowMessageBox(ServiceProvider.GlobalProvider, output, "Include Toolbox", OLEMSGICON.OLEMSGICON_CRITICAL, OLEMSGBUTTON.OLEMSGBUTTON_OK, OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            VsShellUtilities.ShowMessageBox(ServiceProvider.GlobalProvider, output, "BuildTime Toolbox", OLEMSGICON.OLEMSGICON_CRITICAL, OLEMSGBUTTON.OLEMSGBUTTON_OK, OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
 
         public void InfoMsg(string message, params object[] stringParams)
         {
             string output = string.Format(message, stringParams);
             WriteLine(output);
-            VsShellUtilities.ShowMessageBox(ServiceProvider.GlobalProvider, output, "Include Toolbox", OLEMSGICON.OLEMSGICON_INFO, OLEMSGBUTTON.OLEMSGBUTTON_OK, OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            VsShellUtilities.ShowMessageBox(ServiceProvider.GlobalProvider, output, "BuildTime Toolbox", OLEMSGICON.OLEMSGICON_INFO, OLEMSGBUTTON.OLEMSGBUTTON_OK, OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
 
         public void OutputToForeground()

@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:IncludeToolbox.GraphWindow"
              x:Class="IncludeToolbox.GraphWindow.IncludeGraphControl"
              mc:Ignorable="d">
-    
+
     <UserControl.DataContext>
         <local:IncludeGraphViewModel/>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

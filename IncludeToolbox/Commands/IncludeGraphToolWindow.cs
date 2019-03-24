@@ -25,7 +25,7 @@ namespace IncludeToolbox.Commands
             ToolWindowPane window = Package.FindToolWindow(typeof(GraphWindow.IncludeGraphToolWindow), 0, true);
             if (window?.Frame == null)
             {
-                Output.Instance.ErrorMsg("Failed to open Include Graph window!");
+                Output.Instance.ErrorMsg("Failed to open BuildTime Graph window!");
             }
             else
             {

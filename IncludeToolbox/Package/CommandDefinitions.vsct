@@ -40,8 +40,8 @@
       <Menu guid="guidGraphWindowToolbarCmdSet" id="idGraphWindowToolbar" type="ToolWindowToolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
-          <ButtonText>Include Graph Toolbar</ButtonText>
-          <CommandName>Include Graph Toolbar</CommandName>
+          <ButtonText>BuildTime Graph Toolbar</ButtonText>
+          <CommandName>BuildTime Graph Toolbar</CommandName>
         </Strings>
       </Menu>
     </Menus>
@@ -53,7 +53,7 @@
       <Group guid="guidIncludeGraphWindowCmdSet" id="IncludeGraphToolWindowGroup" priority="0x8000"/>
       <Group guid="guidProjectMenuCmdSet" id="ProjectMenuGroup" priority="0x8000"/>
     
-      <!-- Groups for include graph window toolbar -->
+      <!-- Groups for BuildTime graph window toolbar -->
       <Group guid="guidGraphWindowToolbarCmdSet" id="idGraphWindowToolbarGroupRefresh" priority="0x0000">
         <Parent guid="guidGraphWindowToolbarCmdSet" id="idGraphWindowToolbar" />
       </Group>
@@ -112,12 +112,12 @@
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidIconsCommon" id="iconExplorer" />
         <Strings>
-          <ButtonText>Include Graph</ButtonText>
+          <ButtonText>BuildTime Graph</ButtonText>
         </Strings>
       </Button>
 
 
-      <!-- Buttons for include graph window toolbar -->
+      <!-- Buttons for BuildTime graph window toolbar -->
       <Button guid="guidGraphWindowToolbarCmdSet" id="idGraphWindowRefresh" priority="0x00" type="Button">
         <Parent guid="guidGraphWindowToolbarCmdSet" id="idGraphWindowToolbarGroupRefresh" />
         <Icon guid="guidIconsGraphWindowToolbar" id="iconRefresh" />
@@ -162,7 +162,7 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidIncludeToolboxPackage" value="{5c2743c4-1b3f-4edd-b6a0-4379f867d47f}" />
+    <GuidSymbol name="guidIncludeToolboxPackage" value="{cdc6ea95-bd56-4028-8730-7c66f78ca7a8}" />
     
     <GuidSymbol name="guidCodeMenuCmdSet" value="{aef3a531-8af4-4b7b-800a-e32503dfc6e2}">
       <IDSymbol name="EditMenuGroup" value="0x1020" />

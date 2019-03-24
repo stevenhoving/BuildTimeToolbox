@@ -8,6 +8,6 @@ namespace IncludeToolbox.Options
 {
     public static class Constants
     {
-        public const string Category = "Include Toolbox";
+        public const string Category = "BuildTime Toolbox";
     }
 }

@@ -37,7 +37,7 @@ namespace IncludeToolbox.Graph
 
             if (VSUtils.VCUtils.IsCompilableFile(document, out reasonForFailure) == false)
             {
-                reasonForFailure = string.Format("Can't extract include graph since current file '{0}' can't be compiled: {1}.", document?.FullName ?? "<no file>", reasonForFailure);
+                reasonForFailure = string.Format("Can't extract BuildTime graph since current file '{0}' can't be compiled: {1}.", document?.FullName ?? "<no file>", reasonForFailure);
                 return false;
             }
 
@@ -148,7 +148,6 @@ namespace IncludeToolbox.Graph
         {
             public string filename;
             public double time; // time in seconds
-            public int count; // header count
         };
 
         private static FilenameAndTime GetFilenameAndTime(string text)
@@ -189,7 +188,6 @@ namespace IncludeToolbox.Graph
                 var includeDirectories = VSUtils.GetProjectIncludeDirectories(documentBeingCompiled.ProjectItem.ContainingProject);
                 includeDirectories.Insert(0, PathUtil.Normalize(documentBeingCompiled.Path) + Path.DirectorySeparatorChar);
 
-                //const string includeNoteString = "Note: including file: ";
                 const string includeHeadersString = "Include Headers:";
                 string[] outputLines = System.Text.RegularExpressions.Regex.Split(outputText, "\r\n|\r|\n"); // yes there are actually \r\n in there in some VS versions.
 
@@ -199,7 +197,6 @@ namespace IncludeToolbox.Graph
                  - 1 means parsing 'Include Headers:' section
                  */
                 int mode = 0;
-
                 for (int line_index = 0; line_index < outputLines.Count(); line_index++)
                 {
                     string line = outputLines[line_index];
@@ -235,34 +232,14 @@ namespace IncludeToolbox.Graph
                         IncludeGraph.GraphItem includedItem = graphBeingExtended.CreateOrGetItem(filename_and_time.filename, filename_and_time.time, out _);
                         includeTreeItemStack.Peek().Includes.Add(new IncludeGraph.Include() { IncludedFile = includedItem });
                     }
+
                     mode = 0;
-
-/*
-                    int startIndex = 0;
-                    startIndex += includeHeadersString.Length;
-
-                    int includeStartIndex = startIndex;
-                    while (includeStartIndex < line.Length && line[includeStartIndex] == ' ')
-                        ++includeStartIndex;
-                    int depth = includeStartIndex - startIndex;
-
-                    if (depth >= includeTreeItemStack.Count)
-                    {
-                        includeTreeItemStack.Push(includeTreeItemStack.Peek().Includes.Last().IncludedFile);
-                    }
-                    while (depth < includeTreeItemStack.Count - 1)
-                        includeTreeItemStack.Pop();
-
-                    string fullIncludePath = line.Substring(includeStartIndex);
-                    IncludeGraph.GraphItem includedItem = graphBeingExtended.CreateOrGetItem(fullIncludePath, out _);
-                    includeTreeItemStack.Peek().Includes.Add(new IncludeGraph.Include() { IncludedFile = includedItem });
-*/
                 }
             }
 
             catch(Exception e)
             {
-                Output.Instance.ErrorMsg("Failed to parse output from /showInclude compilation of file '{0}': {1}", documentBeingCompiled.FullName, e);
+                Output.Instance.ErrorMsg("Failed to parse output from -d1reportTime compilation of file '{0}': {1}", documentBeingCompiled.FullName, e);
                 successfulParsing = false;
                 return;
             }

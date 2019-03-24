@@ -23,7 +23,7 @@ namespace IncludeToolbox
         /// <summary>
         /// IncludeToolboxPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "5c2743c4-1b3f-4edd-b6a0-4379f867d47f";
+        public const string PackageGuidString = "cdc6ea95-bd56-4028-8730-7c66f78ca7a8";
 
         static public Package Instance { get; private set; }
 
@@ -45,8 +45,6 @@ namespace IncludeToolbox
         protected override void Initialize()
         {
             Commands.IncludeGraphToolWindow.Initialize(this);
-            Commands.FormatIncludes.Initialize(this);
-
             base.Initialize();
         }
 
