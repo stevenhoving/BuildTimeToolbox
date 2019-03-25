@@ -1,4 +1,4 @@
 # BuildTimeToolbox
-Visual Studio extension for managing C/C++ build time:
+Visual Studio extension for creating insight into C/C++ build times:
 
 Forked from IncludeToolbox
