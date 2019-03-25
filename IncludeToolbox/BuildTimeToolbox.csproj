@@ -18,7 +18,7 @@
     <OldToolsVersion>14.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Package\Key.snk</AssemblyOriginatorKeyFile>
@@ -33,7 +33,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IncludeToolbox</RootNamespace>
-    <AssemblyName>IncludeToolbox</AssemblyName>
+    <AssemblyName>BuildTimeToolbox</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>

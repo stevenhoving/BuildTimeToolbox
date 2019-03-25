@@ -24,7 +24,7 @@ namespace IncludeToolbox
                 return;
 
             OutputWindow outputWindow = dte.ToolWindows.OutputWindow;
-            outputWindowPane = outputWindow.OutputWindowPanes.Add("IncludeToolbox");
+            outputWindowPane = outputWindow.OutputWindowPanes.Add("BuildTimeToolbox");
         }
 
         public void Clear()

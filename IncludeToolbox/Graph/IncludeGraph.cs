@@ -80,11 +80,12 @@ namespace IncludeToolbox.Graph
         public GraphItem CreateOrGetItem_AbsoluteNormalizedPath(string normalizedAbsoluteFilename, double time, out bool isNew)
         {
             GraphItem outItem;
-            isNew = !graphItems.TryGetValue(normalizedAbsoluteFilename, out outItem);
+            string key = normalizedAbsoluteFilename + time.ToString();
+            isNew = !graphItems.TryGetValue(key, out outItem);
             if (isNew)
             {
                 outItem = new GraphItem(normalizedAbsoluteFilename, time);
-                graphItems.Add(normalizedAbsoluteFilename, outItem);
+                graphItems.Add(key, outItem);
             }
             return outItem;
         }
@@ -92,7 +93,7 @@ namespace IncludeToolbox.Graph
         public DGMLGraph ToDGMLGraph()
         {
             DGMLGraph dgmlGraph = new DGMLGraph();
-            foreach (GraphItem node in graphItems.Values)
+            foreach (GraphItem node in GraphItems)
             {
                 dgmlGraph.Nodes.Add(new DGMLGraph.Node { Id = node.AbsoluteFilename, Label = node.FormattedName });
                 foreach (Include include in node.Includes)

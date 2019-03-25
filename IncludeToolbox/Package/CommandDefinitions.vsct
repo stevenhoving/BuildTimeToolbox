@@ -74,40 +74,6 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
 
-      <Button guid="guidCodeMenuCmdSet" id="FormatIncludesId" priority="0x0100" type="Button">
-        <Parent guid="guidCodeMenuCmdSet" id="EditMenuGroup" />
-        <Icon guid="guidIconsCommon" id="iconFormatter" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <ButtonText>Format Selected Includes</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidCodeMenuCmdSet" id="IncludeWhatYouUseId" priority="0x0101" type="Button">
-        <Parent guid="guidCodeMenuCmdSet" id="EditMenuGroup" />
-        <Icon guid="guidIconsCommon" id="iconIWYU" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <ButtonText>Run Include-What-You-Use</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidCodeMenuCmdSet" id="TryAndErrorRemovalId" priority="0x0102" type="Button">
-        <Parent guid="guidCodeMenuCmdSet" id="EditMenuGroup" />
-        <Icon guid="guidIconsCommon" id="iconTryAndError" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <ButtonText>Try and Error Include Removal</ButtonText>
-        </Strings>
-      </Button>
-
-      <Button guid="guidProjectMenuCmdSet" id="ProjectWideTryAndErrorRemovalId" priority="0x2000" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD" />
-        <Icon guid="guidIconsCommon" id="iconTryAndError" />
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <ButtonText>Try and Error Include Removal</ButtonText>
-        </Strings>
-      </Button>
-
       <Button guid="guidIncludeGraphWindowCmdSet" id="IncludeGraphToolWindowCommandId" priority="0x2000" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidIconsCommon" id="iconExplorer" />
